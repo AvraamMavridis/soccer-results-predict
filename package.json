@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "classify.js": "^0.1.3",
     "csv-to-json": "^0.1.2",
+    "dclassify": "^1.1.2",
     "lodash": "^3.10.1",
     "promise": "^7.0.4"
   }

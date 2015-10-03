@@ -3,35 +3,59 @@
 var csv = require('csv-to-json');
 var _ = require('lodash');
 var Promise = require('promise');
-var Classifier = require('classify.js');
+var fs = require('fs');
 
-var Rclassifier = new Classifier();
+var dclassify = require('dclassify');
+var Classifier = dclassify.Classifier;
+var DataSet    = dclassify.DataSet;
+var Document   = dclassify.Document;
 
-var obj = {
-    filename: './data/Greece-2014-2015.csv'
-};
+/**
+ * Array of filepaths from files with results
+ */
+var dataSet = fs.readdirSync('./data/').map(function(path) { return `./data/${path}`; });
 
-var dataSet = [
-  './data/Greece-2008-2009.csv',
-  './data/Greece-2009-2010.csv',
-  './data/Greece-2010-2011.csv',
-  './data/Greece-2011-2012.csv',
-  './data/Greece-2012-2013.csv',
-  './data/Greece-2013-2014.csv',
-  './data/Greece-2014-2015.csv',];
-
-
+/**
+ * Helper function to delete the properties with undefined value from an object
+ * @param {String} filename
+ * @return {Object} with filename property
+ */
 let createObjectToParse = function(filename){
   return { filename };
 }
 
+/**
+ * Helper function to delete the properties with undefined value from an object
+ * @param {Object}
+ * @return {Object}
+ */
+let deleteUndefinedValues = function(obj){
+  _.keys(obj).forEach(function(key){
+    if(Boolean(obj[key])){}
+    else{
+      delete obj[key];
+    }
+  });
 
-let parseResults = function(obj){
+  return obj;
+}
+
+/**
+ * Parses one individual file removing undefined values, Divition and Date from the results
+ * @param {Object} Object with filename property
+ * @return {promise} Array of results
+ */
+let parseResults = function(objectToParse){
   let promise = new Promise(function(resolve, reject){
-    csv.parse(obj, function(err, json){
+    csv.parse(objectToParse, function(err, json){
       if(err) reject(err);
       else{
-        let results = _.map(json, function(result){ return _.pick(result, ['HomeTeam', 'AwayTeam','FTR','HTR']);});
+        let results = _.map(json, function(result){
+          let res = _.omit(result, ['Div', 'Date']);
+          res = deleteUndefinedValues(res);
+          return res;
+        });
+
         resolve(results);
       }
     });
@@ -39,38 +63,70 @@ let parseResults = function(obj){
   return promise;
 }
 
+/**
+ * Parses the results per file
+ * @param {array} Array of results per file
+ * @return {array} Array of results
+ */
+let parseResultsPerFile = function(results){
+  return _.map(results, function(result){
 
-
-let addResultsToClassifierPerFile = function(results, classifier){
-  _.forEach(results, function(result){
     if(_.includes(['H', 'D', 'A'], result.FTR)){
-      console.log(result.FTR);
-      classifier.train(result.FTR, `${result.HomeTeam.split(' ').join('')} ${result.AwayTeam.split(' ').join('')}`);
+
+      let resultCharacteristics = [];
+      _.keys(result).forEach(function(key){
+        resultCharacteristics.push(`${key} : ${result[key]}`);
+      });
+
+      let item = new Document('res' + Math.random(), resultCharacteristics);
+      item.finalResult = result.FTR;
+      return item;
     }
   });
 }
 
-let addResultsToClassifier = function(classifier){
+/**
+ * Creates a new classifier, add the results on it and returns a promise
+ * @return {promise} When it will be resolved returns the classifier
+ */
+let addResultsToClassifier = function(){
+
+  let classifierData = new DataSet();
+  let classifier = new Classifier();
+
   let arrayOfPromises = _.map(dataSet, function(filepath){
     return parseResults(createObjectToParse(filepath));
   });
 
   return Promise.all(arrayOfPromises).then(function(results){
     results = _.flatten(results);
-    addResultsToClassifierPerFile(results, classifier);
+    results = parseResultsPerFile(results, classifierData);
+
+    let homeWins = _.filter(results, { finalResult: 'H' });
+    let awayWins = _.filter(results, { finalResult: 'A' });
+    let draws = _.filter(results, { finalResult: 'D' });
+
+    classifierData.add('H', homeWins);
+    classifierData.add('A', awayWins);
+    classifierData.add('D', draws);
+
+    classifier.train(classifierData);
+
     return classifier;
   });
 }
 
-
-
-let predictResult = function(teamA, teamB){
-  addResultsToClassifier(Rclassifier)
+/**
+ * Predict the result of a match.
+ * Reads HomeTeam, AwayTeam from the command line
+ */
+let predictResults = function(){
+  let HomeTeam = process.argv[2];
+  let AwayTeam = process.argv[3];
+  addResultsToClassifier()
     .then(function(classifier){
-      let matchResult = classifier.classify(`${teamA} ${teamB}`);
-      console.log(classifier)
-      console.log(`Match result: ${matchResult}`);
-    })
-}
-
-predictResult('Kavala', 'Olympiakos');
+      let testDoc = new Document('testDoc', [`HomeTeam : ${HomeTeam}`, `AwayTeam : ${AwayTeam}`]);
+      let result1 = classifier.classify(testDoc);
+      console.log(result1);
+    });
+}();
