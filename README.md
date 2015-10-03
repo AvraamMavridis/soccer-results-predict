@@ -11,9 +11,9 @@ A proof of concept of using Bayesian to predict soccer results based on history.
 | Iraklis - Xanthi      | X      |   42.14% | 1-1![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
 | Olympiakos - Giannina | 1     |    68.94% | 5-1![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
 | Panathinaikos - Platanias | 1      |    72.06% | 1-0![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
-| Panionios - Panthrakikos | 1     |    39.13% | 1-1![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/false.png "Λάθος")
-| Levadeiakos - Asteras | 2     |    37.97% | 2-1![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/false.png "Λάθος")
-| Atromitos - PAOK | X     |    47.28% | 1-2![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/false.png "Λάθος")
+| Panionios - Panthrakikos | 1     |    39.13% | 1-1![alt text](http://findicons.com/files/icons/977/rrze/22/false.png "Λάθος")
+| Levadeiakos - Asteras | 2     |    37.97% | 2-1![alt text](http://findicons.com/files/icons/977/rrze/22/false.png "Λάθος")
+| Atromitos - PAOK | X     |    47.28% | 1-2![alt text](http://findicons.com/files/icons/977/rrze/22/false.png "Λάθος")
 | Veria - AEK | 2     |    52.89% | 1-2 ![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
 
 ##### 6ή Αγωνιστική
