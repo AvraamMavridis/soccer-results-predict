@@ -20,7 +20,7 @@ A proof of concept of using Bayesian to predict soccer results based on history.
 
 | Αγώνας        | Προβλεπόμενο σημείο           | Πιθανότητα  | Αποτέλεσμα  |
 | ------------- |:-------------:| :-----:| -----:|
-| Panthrakikos - Levadeiakos      | 2 | 40.7% | 1-3 ![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό
+| Panthrakikos - Levadeiakos      | 2 | 40.7% | 1-3 ![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
 | Panetolikos - Panionios      | X      |   37.9% |
 | Xanthi - Panathinaikos | 2      |    58.46% |
 | AEK - Atromitos | 1      |    48.25% |
