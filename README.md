@@ -26,7 +26,7 @@ A proof of concept of using Bayesian to predict soccer results based on history.
 | AEK - Atromitos | 1      |    48.25% | 1-0![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
 | Giannina - Iraklis | X     |    41.20% | 2-2![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
 | Kalloni - Veria | 1     |    42.19% |0-1![alt text](http://findicons.com/files/icons/977/rrze/22/false.png "Λάθος")
-| Asteras - Platanias | 1     |    44.87% |
+| Asteras - Platanias | 1     |    44.87% |1-1![alt text](http://findicons.com/files/icons/977/rrze/22/false.png "Λάθος")
 | PAOK - Olympiakos | 2     |    46.86% | 0-2![alt text](https://raw.githubusercontent.com/AvraamMavridis/soccer-results-predict/master/correct.png "Σωστό")
 
 Το πρότζεκτ αυτο προσπαθεί να εξετάσει ποιες παραμέτρους είναι σημαντικές για την πρόβλεψη με βάση την προϊστορία, η ανάπτυξη του ειναι σε εξέλιξη, προς το παρόν λαμβάνουμε υπόψη "Γηπεδούχο", "Φιλοξενούμενο", στην συνέχεια θα προστεθούν και άλλοι παράμετροι όπως π.χ. τις αποδόσεις των στοιχηματικών εταιρίων για το αντίστοιχο ματς στο παρελθόν.
