@@ -1,4 +1,7 @@
 # soccer-results-predict
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/AvraamMavridis/soccer-results-predict.svg)](https://greenkeeper.io/)
+
 A proof of concept of using Bayesian to predict soccer results based on history. Work in progress
 
 #### Προγνωστικά αλγόριθμου με βάση την προϊστορία των τελευταίων 20 ετών και τα αποτελέσματα που φέρουν γενικότερα οι ομάδες ως γηπεδούχοι και φιλοξενούμενοι.
