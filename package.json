@@ -11,7 +11,7 @@
   "devDependencies": {
     "csv-to-json": "^0.1.2",
     "dclassify": "^1.1.2",
-    "lodash": "^3.10.1",
-    "promise": "^7.0.4"
+    "lodash": "^4.17.10",
+    "promise": "^8.0.1"
   }
 }
